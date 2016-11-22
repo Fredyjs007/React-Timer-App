@@ -25,11 +25,14 @@
         Main: 'app/components/Main.jsx',
         applicationStyles: 'app/styles/app.scss',
         Nav: 'app/components/Nav.jsx',
-        Timer: 'app/components/Timer.jsx',
         Countdown: 'app/components/Countdown.jsx',
         Clock: 'app/components/Clock.jsx',
         CountdownForm: 'app/components/CountdownForm.jsx',
-        Controls: 'app/components/Controls.jsx'
+        Controls: 'app/components/Controls.jsx',
+        Timer: 'app/components/Timer.jsx',
+        TimerClock: 'app/components/TimerClock.jsx',
+        TimerControls: 'app/components/TimerControls.jsx',
+        TimerForm: 'app/components/TimerForm.jsx'
       },
       extensions: ['', '.js', '.jsx']
     },
