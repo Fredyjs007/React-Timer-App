@@ -1,12 +1,11 @@
   var React = require('react');
-  var TimerClock = require('TimerClock');
-  var TimerForm = require('TimerForm');
-  var TimerControls = require('TimerControls');
+  var Clock = require('Clock');
+  var Controls = require('Controls');
 
   var Timer = React.createClass({
     getInitialState: function () {
       return {
-        timerCount: 0,
+        count: 0,
         timerStatus: 'stopped'
       };
     },
@@ -14,58 +13,40 @@
       if (this.state.timerStatus !== prevState.timerStatus) {
         switch (this.state.timerStatus) {
           case 'started':
-            this.startClock();
+            this.handleStart();
             break;
           case 'stopped':
-            this.setState({timerCount: 0});
+            this.setState({count: 0});
+          case 'paused':
+            clearInterval(this.timer);
+            this.timer = undefined;
             break;
         }
       }
     },
     componentWillUnmount: function () {
-      console.log('component did unmount');
-      clearInterval(this.clock);
-      this.clock = undefined;
+      clearInterval(this.timer);
     },
-    startClock: function () {
-      this.clock = setInterval(() => {
-        var timerCount = this.state.count +1;
+    handleStart: function () {
+      this.timer = setInterval(() => {
         this.setState({
-          count: newCount >= 0 ? newCount : 0
+          count: this.state.count +1
         });
-
-        if (newCount === 0) {
-          this.setState({timerStatus: 'stopped'});
-        }
       }, 1000);
     },
-    handleCounter: function (eSeconds) {
-      this.setState({
-        count: eSeconds,
-        timerStatus: 'started'
-      });
-    },
-    handleStatusCounter: function (newStatus) {
-      this.setState({timerStatus: newStatus});
+    handleStatusChange: function (newTimerStatus) {
+      this.setState({timerStatus: newTimerStatus});
     },
     render: function () {
       var {count, timerStatus} = this.state;
-      var renderTimerContolArea = () => {
-        if (timerStatus !== 'stopped') {
-          return <timerControls timerStatus={timerStatus} onControlChange={this.handleStatusCounter}/>;
-        } else {
-          return /////
-        }
-      };
       return (
-        <div className="timer">
-          <h1 className="timer-title">
-            Timer
-          </h1>
+        <div>
+          <h1 className="page-title">Timer</h1>
+          <Clock totalSeconds={count}/>
+          <Controls countdownStatus={timerStatus} onStatusChange={this.handleStatusChange}/>
         </div>
-      );
+      )
     }
   });
-
 
   module.exports = Timer;

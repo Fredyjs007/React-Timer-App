@@ -29,10 +29,7 @@
         Clock: 'app/components/Clock.jsx',
         CountdownForm: 'app/components/CountdownForm.jsx',
         Controls: 'app/components/Controls.jsx',
-        Timer: 'app/components/Timer.jsx',
-        TimerClock: 'app/components/TimerClock.jsx',
-        TimerControls: 'app/components/TimerControls.jsx',
-        TimerForm: 'app/components/TimerForm.jsx'
+        Timer: 'app/components/Timer.jsx'
       },
       extensions: ['', '.js', '.jsx']
     },
